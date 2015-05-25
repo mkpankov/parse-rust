@@ -4,8 +4,9 @@ use std::collections::BTreeMap;
 use std::io::BufRead;
 
 fn main() {
-    let re = regex::Regex::new("\"GET (?:https?://.+?/)?(.+?\\.mp3) \
-                                HTTP/1\\.[01]\" \\d{3} (\\d+)").unwrap();
+    let s = concat!(r#""GET (?:https?://.+?/)?(.+?\.mp3)"#,
+                    r#" HTTP/1\.[01]" \d{3} (\d+)"#);
+    let re = regex::Regex::new(s).unwrap();
     let stdin = std::io::stdin();
     let locked_stdin = stdin.lock();
     let mut stat: BTreeMap<String, (isize, isize)> = BTreeMap::new();
