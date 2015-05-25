@@ -22,14 +22,15 @@ fn main() {
                 std::str::FromStr::from_str(
                     captures[0].at(2).unwrap())
                 .unwrap();
-            if ! stat.contains_key(fname) {
-                stat.insert(fname.to_owned(), (size, size));
-            } else {
-                let pair = stat.get(fname).unwrap().clone();
-                let (mut sum, mut max) = pair;
-                sum += size;
-                max = std::cmp::max(max, size);
-                stat.insert(fname.to_owned(), (sum, max));
+            match stat.get(fname).clone() {
+                Some(&(mut sum, mut max)) => {
+                    sum += size;
+                    max = std::cmp::max(max, size);
+                    stat.insert(fname.to_owned(), (sum, max));
+                }
+                None => {
+                    stat.insert(fname.to_owned(), (size, size));
+                },
             }
         }
     };
