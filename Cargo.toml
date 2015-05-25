@@ -2,3 +2,7 @@
 name = "parse-rust"
 version = "0.1.0"
 authors = ["Michael Pankov <work@michaelpankov.com>"]
+
+[dependencies]
+
+regex = "*"
