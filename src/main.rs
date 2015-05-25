@@ -1,6 +1,6 @@
 extern crate regex;
 
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 use std::io::BufRead;
 
 fn main() {
@@ -8,11 +8,10 @@ fn main() {
                                 HTTP/1\\.[01]\" \\d{3} (\\d+)").unwrap();
     let stdin = std::io::stdin();
     let locked_stdin = stdin.lock();
-    let mut stat: HashMap<String, (isize, isize)> = HashMap::new();
+    let mut stat: BTreeMap<String, (isize, isize)> = BTreeMap::new();
 
     for maybe_line in locked_stdin.lines() {
         let line = maybe_line.unwrap();
-        println!("{}", line);
         let captures: Vec<_> = re.captures_iter(&line).collect();
         if captures.len() == 1 {
             let fname = captures[0].at(1).unwrap();
@@ -39,7 +38,7 @@ fn main() {
             max = 1;
         }
         let downloads: f64 = sum as f64 / max as f64;
-        println!("Key: {} downloads: {} (max size: {}_)",
+        println!("Key: {} downloads: {} (max size: {})",
                  key, downloads, max);
     }
 }
