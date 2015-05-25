@@ -37,7 +37,7 @@ fn main() {
         if max == 0 {
             max = 1;
         }
-        let downloads: f64 = sum as f64 / max as f64;
+        let downloads = sum as f64 / max as f64;
         println!("Key: {} downloads: {} (max size: {})",
                  key, downloads, max);
     }
