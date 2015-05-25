@@ -22,7 +22,7 @@ fn main() {
                 std::str::FromStr::from_str(
                     captures[0].at(2).unwrap())
                 .unwrap();
-            match stat.get(fname).clone() {
+            match stat.get(fname) {
                 Some(&(mut sum, mut max)) => {
                     sum += size;
                     max = std::cmp::max(max, size);
