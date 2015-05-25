@@ -1,12 +1,14 @@
+#![feature(plugin)]
+#![plugin(regex_macros)]
 extern crate regex;
 
 use std::collections::BTreeMap;
 use std::io::BufRead;
 
 fn main() {
-    let s = concat!(r#""GET (?:https?://.+?/)?(.+?\.mp3)"#,
-                    r#" HTTP/1\.[01]" \d{3} (\d+)"#);
-    let re = regex::Regex::new(s).unwrap();
+    let re = regex!(concat!(
+        r#""GET (?:https?://.+?/)?(.+?\.mp3)"#,
+        r#" HTTP/1\.[01]" \d{3} (\d+)"#));
     let stdin = std::io::stdin();
     let locked_stdin = stdin.lock();
     let mut stat: BTreeMap<String, (isize, isize)> = BTreeMap::new();
