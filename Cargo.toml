@@ -6,4 +6,3 @@ authors = ["Michael Pankov <work@michaelpankov.com>"]
 [dependencies]
 
 regex = "*"
-regex_macros = "*"
